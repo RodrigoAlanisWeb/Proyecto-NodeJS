@@ -1,0 +1,28 @@
+<%- include('layout/header') %>
+
+<form action="/save-post/<%=cookies.name%>" class="container__form" method="POST" enctype="multipart/form-data">
+    <h1 class="container__formTitle">Crear Post</h1>
+    <p class="container__formDescription">
+        Crea tu post sobre lo que quieras eligiendo una categoria en la que los demas usuarios podran
+        verlo
+    </p>
+
+    <label for="title">Titulo: </label>
+    <input type="text" name="title">
+
+    <label for="description">Description: </label>
+    <textarea name="description" cols="30" rows="10"></textarea>
+
+    <label for="categoria">Categoria: </label>
+    <select name="" id="">
+        <%data.forEach(element => { %>
+            <option value="<%= element.id %> "><%= element.name %> </option>
+        <% }) %>
+    </select>
+
+    <button type="submit">
+        Crear
+    </button>
+</form>
+
+<%- include('layout/aside') %>

@@ -1,0 +1,18 @@
+<%- include('layout/header') %>
+
+<form action="/save-cat" class="container__form" method="POST" enctype="multipart/form-data">
+    <h1 class="container__formTitle">Crear Post</h1>
+    <p class="container__formDescription">
+        Crea tu post sobre lo que quieras eligiendo una categoria en la que los demas usuarios podran
+        verlo
+    </p>
+
+    <label for="name">Nombre: </label>
+    <input type="text" name="name">
+
+    <button type="submit">
+        Crear
+    </button>
+</form>
+
+<%- include('layout/aside') %>

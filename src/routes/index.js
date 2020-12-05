@@ -6,12 +6,14 @@ const bcrypt = require('bcryptjs');
 
 const Post = require('../models/post');
 const User = require('../models/user');
+const Categoria = require('../models/categoria');
 
 router.get('/', async (req, res) => {
-    const data = await Post.find();
+    const data = await Post.find().limit(7);
+    const cats =  await Categoria.find();
     const { cookies } = req;
     if ('name' in cookies){
-        res.render('index', { data ,log: true,cookies });
+        res.render('index', { data ,cats,log: true,cookies });
         console.log(cookies);
     } else {
         res.render('index', { data ,log: ''});
@@ -56,6 +58,7 @@ router.post('/login', async (req, res) => {
         let verification = await bcrypt.compare(req.body.password,user[0].password);
 
         if (verification) {
+            res.cookie('id',user[0].id);
             res.cookie('name',user[0].name);
             res.cookie('nick',user[0].nick_name);
             res.cookie('email',user[0].email);
@@ -68,11 +71,61 @@ router.post('/login', async (req, res) => {
 })
 
 router.get('/logout',(req,res)=>{
+    res.clearCookie('id');
     res.clearCookie('name');
     res.clearCookie('email');
     res.clearCookie('nick');
     res.clearCookie('image');
     res.redirect('/')
+})
+
+router.get('/create-post',async (req,res)=>{
+    const cats =  await Categoria.find();
+    const data = await Categoria.find(); 
+    console.log(data);
+    const { cookies } = req;
+    if ('name' in cookies){
+        res.render('create-post', {data,cats,log: true,cookies });
+    } else {
+        res.redirect('/')
+    }
+});
+
+router.post('/save-post/:user',async (req,res)=>{
+    const post = new Post({
+        'title': req.body.title,
+        'description': req.body.description,
+        'categoria': req.body.categoria,
+        'user': req.params.user,
+    });
+    await post.save();
+
+    res.redirect('/');
+})
+
+router.get('/create-cat',async (req,res)=>{ 
+    const cats =  await Categoria.find();
+    const { cookies } = req;
+    if ('name' in cookies){
+        res.render('create-cat',{cats,log: true,cookies });
+    } else {
+        res.redirect('/')
+    }
+});
+
+router.post('/save-cat',async (req,res)=>{
+    const cat = new Categoria({
+        'name': req.body.name,
+    });
+    await cat.save();
+
+    res.redirect('/');
+});
+
+router.get('/src/:id',async (req,res)=>{
+    const cats =  await Categoria.find();
+    const post = await Post.findById(req.params.id);
+    res.render('post',{cats,post,log: ''});
 })
 
 module.exports = router;

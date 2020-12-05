@@ -19,6 +19,8 @@
 }
 
 .header__menu{
+    display: flex;
+    justify-content: space-between;
     background-color: #dcdcdc;
     height: 50px;
     box-shadow: 0px 0px 3px #dcdc;
@@ -32,7 +34,7 @@
 
 .header__item{
     list-style: none;
-    line-height: 40px;
+    line-height: 50px;
 }
 
 .header__link{
@@ -77,12 +79,15 @@
      padding: 5px;
      border-radius: 3px;
      border: 1px solid #dcdcdc;
+    outline: none;
+    font-size: 16px;
  }
 
  .container__form label{
      display: block;
      margin-bottom: 10px;
      margin-top: 10px;
+     font-weight: 400;
  }
 
  .container__form .container__formContainer{
@@ -212,7 +217,7 @@
     font-weight: 300;
 }
 
-.container__userLogOut{
+.container__userButton{
     display: block;
     width: 100%;
     margin-top: 20px;
@@ -224,4 +229,59 @@
     text-align: center;
     text-decoration: none;
     color: black;
+}
+
+.header__options{
+    display: grid;
+    flex-direction: column;
+    grid-template-rows: 100% 1fr;
+    align-content: flex-start;
+}
+
+.header__optionsList{
+    background-color: white;
+    z-index: 1000;
+    padding: 10px;
+    box-shadow: 0px 0px 3px #dcdc;
+    height: 200px;
+    margin-right: 40px;
+    user-select: none;
+}
+
+.header__optionsList li{
+    margin-bottom: 5px;
+    user-select: none;
+    line-height: 40px;
+}
+
+#options{
+    font-size: 25px;
+    margin: 0px auto;
+    margin-top: 12px;
+    margin-right: 100px;
+}
+
+.container__form textarea {
+    width: 100%;
+    border: 1px solid #dcdcdc;
+    padding: 10px;
+    outline: none;
+    font-size: 16px;
+}
+
+.container__form select {
+    width: 50%;
+    border: 1px solid #dcdcdc;
+    outline: none;
+    font-size: 16px;
+}
+
+.container__formTitle{
+    margin-bottom: 10px;
+    font-weight: 300;
+}
+
+.container__formDescription{
+    width: 50%;
+    font-weight: 300;
 }

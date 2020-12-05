@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina de Posts</title>
+    <link rel="stylesheet" href="statics/main.css">
+    <script src="https://kit.fontawesome.com/59a9a8209a.js" crossorigin="anonymous"></script>
+    <script src="statics/jquery-3.5.1.min.js"></script>
+    <script src="statics/main.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header class="header">
+        <h2 class="header__title">
+            Pagina de Posts
+        </h2>
+
+        <nav class="header__menu">
+            <ul class="header__list">
+                <li class="header__item"><a href="/" class="header__link">Principal</a></li>
+                <li class="header__item"><a href="#" class="header__link">Contacto</a></li>
+                <% cats.forEach(element => { %>
+                <li class="header__item"><a href="/show-cat-posts/<%= element.id %> " class="header__link"><%= element.name %> </a></li>
+                <% }) %>
+            </ul>
+            <% if (log == true) { %>
+                <div class="header__options">
+                    <i class="fas fa-sliders-h" id="options"></i>
+                    <ul class="header__optionsList">
+                        <li class="header__item"><a href="/create-cat" class="header__link">Crear Categoria</a></li>
+                        <li class="header__item"><a href="/create-post" class="header__link">Crear Post</a></li>
+                        <li class="header__item"><a href="/edit/<%=cookies.id%>" class="header__link">Editar Cuena</a></li>
+                        <li class="header__item"><a href="/logout" class="header__link">Cerrar Sesion</a></li>
+                    </ul>
+                </div>
+                
+            <%}%>
+        </nav>
+    </header>
+
+    <div class="container">
+
+    <div class="container__main">
+
+        <h1 class="container__title"><%= post.title %></h1>
+        <h2 class="container__category">Categoria: <%= post.categoria %></h2>
+        <p class="container__description">
+            <%= post.description %> 
+        </p>
+        <h3>Creado Por: <%= post.user %> El <%= post.date %> </h3>
+
+<%- include('layout/aside') %>
