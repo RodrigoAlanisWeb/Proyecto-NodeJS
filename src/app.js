@@ -3,6 +3,7 @@ const mongoose =  require('mongoose');
 const path =  require('path');
 const multer = require('multer');
 const morgan = require('morgan');
+const cookieParser = require('cookie-parser');
 
 const app = express();
 
@@ -47,7 +48,9 @@ app.set('view engine','ejs');
 
 app.use(morgan('dev'));
 app.use(uploads);
-app.use(express.static(__dirname + '/statics'));
+app.use('/statics',express.static(__dirname + '/statics'));
+app.use('/public',express.static(__dirname + '/public'));
+app.use(cookieParser());
 
 // Router
 
